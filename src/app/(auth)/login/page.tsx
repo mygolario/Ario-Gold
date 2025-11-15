@@ -53,7 +53,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 px-4 py-12" dir="rtl">
+    <div className="font-vazirmatn flex min-h-screen items-center justify-center bg-neutral-100 px-4 py-12" dir="rtl">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold">???? ?? ????</CardTitle>
