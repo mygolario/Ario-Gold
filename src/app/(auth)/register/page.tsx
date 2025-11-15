@@ -1,5 +1,6 @@
 "use client"
 
+// تست حروف فارسی - این فایل باید با UTF-8 ذخیره شود
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -14,10 +15,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 const registerSchema = z.object({
-  fullName: z.string().min(3, "??? ???? ?? ???? ????"),
-  phone: z.string().min(10, "????? ????? ????"),
-  email: z.string().email("????? ????? ????"),
-  password: z.string().min(8, "????? ? ???????"),
+  fullName: z.string().min(3, "حداقل ۳ کاراکتر"),
+  contact: z.string().min(5, "شماره تماس یا ایمیل معتبر نیست"),
+  username: z.string().min(3, "نام کاربری حداقل ۳ کاراکتر"),
+  password: z.string().min(8, "رمز عبور حداقل ۸ کاراکتر"),
+  passwordConfirm: z.string().min(8, "تکرار رمز عبور حداقل ۸ کاراکتر"),
+}).refine((d) => d.password === d.passwordConfirm, {
+  path: ["passwordConfirm"],
+  message: "رمز عبور و تکرار آن یکسان نیست",
 })
 
 type RegisterFormData = z.infer<typeof registerSchema>
@@ -29,28 +34,34 @@ export default function RegisterPage() {
 
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
-    defaultValues: { fullName: "", phone: "", email: "", password: "" },
+    defaultValues: { fullName: "", contact: "", username: "", password: "", passwordConfirm: "" },
   })
 
   const onSubmit = async (values: RegisterFormData) => {
     setIsSubmitting(true)
     setError(null)
 
+    // سازگاری با API موجود: فیلدهای اصلی را نگه می‌داریم
     const response = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        fullName: values.fullName,
+        phone: values.contact, // ذخیره به عنوان phone
+        email: values.contact.includes("@") ? values.contact : undefined,
+        password: values.password,
+      }),
     })
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}))
-      setError(data.error ?? "??????? ?????? ???")
+      setError(data.error ?? "ثبت‌نام ناموفق بود")
       setIsSubmitting(false)
       return
     }
 
     await signIn("credentials", {
-      email: values.email,
+      email: values.contact,
       password: values.password,
       redirect: false,
     })
@@ -63,48 +74,55 @@ export default function RegisterPage() {
     <div className="font-vazirmatn flex min-h-screen items-center justify-center bg-neutral-100 px-4 py-12" dir="rtl">
       <Card className="w-full max-w-xl">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-semibold">??????? ????? ????</CardTitle>
+          <CardTitle className="text-center text-2xl font-semibold">ایجاد حساب کاربری</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">??? ? ??? ????????</Label>
-              <Input id="fullName" disabled={isSubmitting} {...form.register("fullName")} />
+              <Label htmlFor="fullName">نام و نام خانوادگی</Label>
+              <Input id="fullName" placeholder="مثال: علی رضایی" disabled={isSubmitting} {...form.register("fullName")} />
               {form.formState.errors.fullName && (
                 <p className="text-sm text-destructive">{form.formState.errors.fullName.message}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">????? ??????</Label>
-              <Input id="phone" disabled={isSubmitting} {...form.register("phone")} />
-              {form.formState.errors.phone && (
-                <p className="text-sm text-destructive">{form.formState.errors.phone.message}</p>
+              <Label htmlFor="contact">شماره تماس یا ایمیل</Label>
+              <Input id="contact" placeholder="0912xxxxxxxx یا user@example.com" disabled={isSubmitting} {...form.register("contact")} />
+              {form.formState.errors.contact && (
+                <p className="text-sm text-destructive">{form.formState.errors.contact.message}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">?????</Label>
-              <Input id="email" type="email" disabled={isSubmitting} {...form.register("email")} />
-              {form.formState.errors.email && (
-                <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>
+              <Label htmlFor="username">نام کاربری</Label>
+              <Input id="username" placeholder="نام کاربری" disabled={isSubmitting} {...form.register("username")} />
+              {form.formState.errors.username && (
+                <p className="text-sm text-destructive">{form.formState.errors.username.message}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">???? ????</Label>
-              <Input id="password" type="password" disabled={isSubmitting} {...form.register("password")} />
+              <Label htmlFor="password">رمز عبور</Label>
+              <Input id="password" placeholder="رمز عبور" type="password" disabled={isSubmitting} {...form.register("password")} />
               {form.formState.errors.password && (
                 <p className="text-sm text-destructive">{form.formState.errors.password.message}</p>
               )}
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="passwordConfirm">تکرار رمز عبور</Label>
+              <Input id="passwordConfirm" placeholder="تکرار رمز عبور" type="password" disabled={isSubmitting} {...form.register("passwordConfirm")} />
+              {form.formState.errors.passwordConfirm && (
+                <p className="text-sm text-destructive">{form.formState.errors.passwordConfirm.message}</p>
+              )}
+            </div>
             {error && <p className="text-center text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "?? ??? ????? ????..." : "???????"}
+              {isSubmitting ? "در حال ثبت‌نام..." : "ثبت‌نام"}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-center text-sm">
-          <span className="text-muted-foreground">???? ??????? ????????? </span>
+          <span className="text-muted-foreground">قبلاً ثبت‌نام کرده‌اید؟</span>
           <Link href="/login" className="ml-1 text-primary">
-            ???? ????
+            وارد شوید
           </Link>
         </CardFooter>
       </Card>
