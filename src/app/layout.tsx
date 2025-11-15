@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "آریو طلا | خرید آنلاین طلا با پشتوانه فیزیکی",
+  title: "Ario-Gold — E-commerce MVP Case Study",
   description:
-    "پلتفرم خرید و فروش آنلاین طلا با احراز هویت چندمرحله‌ای، کیف پول دیجیتال و تسویه مبتنی بر قیمت‌های لحظه‌ای بازار ایران.",
+    "Portfolio case study of a university MVP for a trustworthy online gold shopping experience. Mock checkout; no real payments.",
 }
 
 export default async function RootLayout({
@@ -28,7 +28,7 @@ export default async function RootLayout({
   const session = await auth()
 
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="en" dir="ltr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-neutral-50 text-slate-900 antialiased`}
       >

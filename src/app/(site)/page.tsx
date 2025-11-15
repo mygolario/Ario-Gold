@@ -1,221 +1,203 @@
-﻿export const dynamic = "force-dynamic";
-
-import Link from "next/link"
-import { ArrowLeft, Mail, MapPin, PhoneCall, Shield, ShieldCheck, Sparkles } from "lucide-react"
+﻿import Link from "next/link"
+import { ArrowRight, Box, CheckCircle2, Database, FileDown, Layout, ShoppingCart, Shield, Sparkles } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { LivePriceCard } from "@/components/pricing/live-price-card"
-import { getLatestPrices } from "@/lib/price-service"
 
-const advantageItems = [
-  {
-    title: "پوشش کامل با طلا فیزیکی",
-    description: "هر گرم طلای دیجیتال شما در خزانه‌های بیمه‌شده سپرده‌گذاری می‌شود.",
-  },
-  {
-    title: "احراز هویت چندسطحی",
-    description: "KYC هوشمند برای جلوگیری از تقلب و رعایت قوانین مبارزه با پولشویی.",
-  },
-  {
-    title: "تسویه فوری",
-    description: "ثبت سفارش و تسویه کیف پولی در کمتر از چند دقیقه.",
-  },
-]
-
-const steps = [
-  { step: "۱", title: "ثبت‌نام سریع", text: "ورود اطلاعات اولیه و تایید موبایل/ایمیل." },
-  { step: "۲", title: "احراز هویت", text: "بارگذاری مدارک و تایید توسط افسران KYC." },
-  { step: "۳", title: "خرید طلا", text: "انتخاب محصول و پرداخت با کیف پول ریالی." },
-  { step: "۴", title: "تحویل یا نگهداری", text: "درخواست تحویل فیزیکی یا نگهداری امن در خزانه." },
-]
-
-const productTypes = [
-  {
-    title: "طلای گرمی ۱۸ عیار",
-    description: "خرید با حداقل مبلغ و نقدشوندگی بالا برای افراد حقیقی.",
-  },
-  {
-    title: "طلای ۲۴ عیار",
-    description: "پوشش سرمایه‌گذاران حرفه‌ای با امکان تسویه بین‌المللی.",
-  },
-  {
-    title: "سکه امامی",
-    description: "خرید و فروش آنی همراه با امکان تحویل حضوری یا پستی.",
-  },
-  {
-    title: "طلای آب‌شده",
-    description: "دسترسی مستقیم به بازار آب‌شده با کارمزد شفاف.",
-  },
-]
-
-const securityHighlights = [
-  "ذخیره فیزیکی در خزانه‌های بیمه‌شده و تحت نظارت اتحادیه",
-  "رمزنگاری داده‌ها، OTP و لیست دستگاه‌های مجاز",
-  "افسران ریسک برای پایش تراکنش‌های مشکوک",
-  "گزارش‌گیری کامل برای حسابرس و واحد تطبیق",
-]
-
-const contactItems = [
-  { title: "پشتیبانی ۲۴/۷", value: "۰۲۱-۴۲۱۷۱۷", icon: <PhoneCall className="h-5 w-5" /> },
-  { title: "پست الکترونیک", value: "support@ario-gold.ir", icon: <Mail className="h-5 w-5" /> },
-  { title: "دفتر مرکزی", value: "تهران، برج مالی آریو", icon: <MapPin className="h-5 w-5" /> },
-]
-
-export default async function LandingPage() {
-  const prices = await getLatestPrices()
-
+export default function CaseStudyPage() {
   return (
     <div className="space-y-20 pb-16">
+      {/* Hero */}
       <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-[1.1fr,0.9fr]">
-          <div className="space-y-6">
-            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 hover:text-blue-700">خرید امن طلا با پشتوانه فیزیکی</Badge>
-            <div className="space-y-4">
-              <h1 className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">پلتفرم بانکی خرید و فروش طلا با احراز هویت دیجیتال و کیف پول طلایی</h1>
-              <p className="text-lg text-slate-600">
-                آریو طلا تجربه‌ای شفاف برای معامله طلا بر اساس قیمت‌های لحظه‌ای بازار تهران فراهم می‌کند؛ با KYC چندسطحی و امکان تحویل فیزیکی در هر زمان.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3 text-sm text-slate-600">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-blue-600" />
-                مجوز رسمی اتحادیه طلا و جواهر
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-blue-600" />
-                کیف پول طلایی با تسویه لحظه‌ای
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-3">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20">
+          <div className="mx-auto max-w-3xl text-center space-y-6">
+            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 hover:text-blue-700">Portfolio Case Study</Badge>
+            <h1 className="text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
+              Ario-Gold — E-commerce MVP for Online Gold Shopping
+            </h1>
+            <p className="text-lg text-slate-600">
+              A university project MVP exploring a clean, trustworthy experience for buying physical gold online. This site presents the case study. The checkout and payment flows are mock-only and not connected to real payment systems.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Button asChild>
-                <Link href="/register">شروع احراز هویت</Link>
+                <Link href="#features" className="flex items-center gap-2">
+                  View Features
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="#how-it-works" className="flex items-center gap-2">
-                  نحوه کار سیستم
-                  <ArrowLeft className="h-4 w-4" />
+                <Link href="#" onClick={(e) => e.preventDefault()} className="flex items-center gap-2">
+                  Download Case Study (PDF)
+                  <FileDown className="h-4 w-4" />
                 </Link>
               </Button>
             </div>
-          </div>
-          <div id="prices">
-            <LivePriceCard initialPrices={prices} />
-          </div>
-        </div>
-      </section>
-
-      <section id="advantages" className="mx-auto max-w-6xl px-4">
-        <div className="mb-10 space-y-3 text-center">
-          <p className="text-sm font-semibold text-blue-600">چرا آریو طلا؟</p>
-          <h2 className="text-3xl font-bold text-slate-900">مزیت رقابتی</h2>
-          <p className="text-slate-600">زیرساخت بانکی، بیمه بار و پایش ریسک مداوم</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {advantageItems.map((item) => (
-            <Card key={item.title} className="border-blue-100 bg-white">
-              <CardHeader>
-                <CardTitle className="text-xl text-slate-900">{item.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-slate-600">{item.description}</CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section id="how-it-works" className="bg-white py-16">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="mb-12 space-y-2 text-center">
-            <p className="text-sm font-semibold text-blue-600">نحوه خرید طلا</p>
-            <h2 className="text-3xl font-bold text-slate-900">چهار مرحله ساده</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-4">
-            {steps.map((step) => (
-              <div key={step.step} className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-lg font-semibold text-white">
-                  {step.step}
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-slate-900">{step.title}</h3>
-                <p className="text-sm text-slate-600">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="products" className="mx-auto max-w-6xl px-4">
-        <div className="mb-10 space-y-2 text-center">
-          <p className="text-sm font-semibold text-blue-600">سبد محصولات</p>
-          <h2 className="text-3xl font-bold text-slate-900">انواع طلایی که ارائه می‌کنیم</h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {productTypes.map((product) => (
-            <Card key={product.title} className="border-neutral-200 bg-white">
-              <CardHeader>
-                <CardTitle className="text-lg text-slate-900">{product.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-slate-600">{product.description}</CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section id="security" className="bg-neutral-100 py-16">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2">
-          <div className="space-y-4">
-            <p className="text-sm font-semibold text-blue-600">امنیت و KYC</p>
-            <h2 className="text-3xl font-bold text-slate-900">فرایند احراز هویت چندسطحی</h2>
-            <p className="text-slate-600">
-              تمامی کاربران پیش از معامله، تحت فرایند احراز هویت چندسطحی قرار می‌گیرند. داده‌ها رمزنگاری شده و توسط افسران تطبیق به صورت لحظه‌ای کنترل می‌شود.
-            </p>
-            <div className="space-y-3">
-              {securityHighlights.map((item) => (
-                <div key={item} className="flex items-start gap-3 text-sm text-slate-700">
-                  <Shield className="mt-0.5 h-4 w-4 text-blue-600" />
-                  {item}
-                </div>
-              ))}
+            <div className="pt-2 text-xs text-slate-500">
+              MVP demo pages are available for exploration only: {" "}
+              <Link href="/dashboard" className="text-blue-700 underline">Dashboard</Link> {" • "}
+              <Link href="/admin" className="text-blue-700 underline">Admin</Link>
             </div>
           </div>
-          <Card className="self-center border-blue-100 bg-white">
+        </div>
+      </section>
+
+      {/* Overview */}
+      <section id="overview" className="mx-auto max-w-6xl px-4">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-slate-900">Project Overview</h2>
+          <p className="mt-2 text-slate-600">High-level context for the Ario-Gold MVP.</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-4">
+          <Card>
             <CardHeader>
-              <CardTitle>سطوح KYC</CardTitle>
+              <CardTitle>Role</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-sm text-slate-600">
-              <div>
-                <p className="font-semibold text-slate-900">سطح ۱ - اطلاعات پایه</p>
-                <p>ثبت مشخصات هویتی، تلفن و شماره شبای بانکی.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-900">سطح ۲ - مدارک تصویری</p>
-                <p>بارگذاری کارت ملی، سلفی زنده و قبض محل سکونت.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-900">سطح ۳ - کاربران VIP</p>
-                <p>مصاحبه ویدئویی و محدودیت‌های ویژه برای تراکنش‌های بزرگ.</p>
-              </div>
+            <CardContent className="text-slate-600">Product Designer & Full-Stack Developer</CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Timeline</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">2025 – University Project</CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Stack</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">Next.js, TypeScript, Prisma, PostgreSQL, Tailwind CSS</CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Focus</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">MVP for Iranian online gold market</CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Problem & Goals */}
+      <section id="problem-goals" className="bg-white py-16">
+        <div className="mx-auto max-w-4xl space-y-6 px-4">
+          <h2 className="text-3xl font-bold text-slate-900">Problem & Goals</h2>
+          <p className="text-slate-700">
+            In Iran, most gold purchases still happen offline. My professor wanted to see if we could design a clean, trustworthy, modern experience for buying physical gold online.
+          </p>
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">Goals</p>
+            <ul className="grid gap-2 text-slate-700 md:grid-cols-2">
+              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Clear product presentation (weights, purity, prices)</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Simple checkout flow</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Admin-friendly product management</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> A polished MVP to demonstrate technical and design skills</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="mx-auto max-w-6xl px-4">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-slate-900">Solution & Features</h2>
+          <p className="mt-2 text-slate-600">A showcase of the MVP capabilities (mocked payments).</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center gap-3">
+              <Box className="h-5 w-5 text-blue-600" />
+              <CardTitle>Product Catalog</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">Catalog for gold items with clear specs (weight, purity, pricing).</CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center gap-3">
+              <ShoppingCart className="h-5 w-5 text-blue-600" />
+              <CardTitle>Cart & Orders</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">Simple cart and order flow (MVP-only, no real payment processing).</CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center gap-3">
+              <Shield className="h-5 w-5 text-blue-600" />
+              <CardTitle>Basic Admin</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">Admin panel for managing products and reviewing orders.</CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center gap-3">
+              <Sparkles className="h-5 w-5 text-blue-600" />
+              <CardTitle>Scalable Stack</CardTitle>
+            </CardHeader>
+            <CardContent className="text-slate-600">Architecture ready to integrate real payments in the future.</CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Tech Stack & Architecture */}
+      <section id="tech-stack" className="bg-neutral-100 py-16">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-2">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold text-slate-900">Tech Stack & Architecture</h2>
+            <ul className="space-y-2 text-slate-700">
+              <li><span className="font-semibold">Frontend:</span> Next.js, TypeScript, Tailwind CSS</li>
+              <li><span className="font-semibold">Backend:</span> Next.js API Routes, Prisma ORM</li>
+              <li><span className="font-semibold">Database:</span> PostgreSQL</li>
+              <li><span className="font-semibold">Deployment:</span> Development on localhost, ready for Vercel</li>
+            </ul>
+          </div>
+          <Card className="self-center">
+            <CardHeader className="flex flex-row items-center gap-3">
+              <Layout className="h-5 w-5 text-blue-600" />
+              <CardTitle>Flow Overview</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-slate-600 space-y-3">
+              <div className="flex items-center gap-2"><Layout className="h-4 w-4 text-blue-600" /> UI (Next.js pages/components)</div>
+              <div className="flex items-center gap-2"><Shield className="h-4 w-4 text-blue-600" /> API (Route handlers, auth, validation)</div>
+              <div className="flex items-center gap-2"><Database className="h-4 w-4 text-blue-600" /> Data (Prisma models → PostgreSQL)</div>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      <section id="contact" className="mx-auto max-w-6xl px-4">
-        <div className="mb-8 space-y-2 text-center">
-          <p className="text-sm font-semibold text-blue-600">ارتباط با ما</p>
-          <h2 className="text-3xl font-bold text-slate-900">همراه شما در تمام مسیر</h2>
-          <p className="text-slate-600">برای دریافت مشاوره یا دمو سازمانی با ما تماس بگیرید.</p>
+      {/* Screenshots */}
+      <section id="screenshots" className="mx-auto max-w-6xl px-4">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-slate-900">Screenshots</h2>
+          <p className="mt-2 text-slate-600">Placeholder cards — replace with real images later.</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {contactItems.map((item) => (
-            <Card key={item.title} className="border-neutral-200">
-              <CardContent className="flex flex-col gap-3 pt-6 text-slate-700">
-                <div className="text-blue-600">{item.icon}</div>
-                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                <p className="text-sm">{item.value}</p>
-              </CardContent>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Home Screen Placeholder",
+            "Product Detail Placeholder",
+            "Checkout Placeholder",
+            "Admin Panel Placeholder",
+          ].map((title) => (
+            <Card key={title} className="border-dashed">
+              <CardHeader>
+                <CardTitle>{title}</CardTitle>
+              </CardHeader>
+              <CardContent className="h-40 rounded-md bg-neutral-100" />
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* Learnings */}
+      <section id="learnings" className="bg-white py-16">
+        <div className="mx-auto max-w-4xl space-y-6 px-4">
+          <h2 className="text-3xl font-bold text-slate-900">Learnings & Next Steps</h2>
+          <ul className="space-y-2 text-slate-700">
+            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Learned how to design an MVP around real constraints (compliance, local market, payment gateways).</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Practiced connecting a relational database to a modern React framework using Prisma.</li>
+            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Improved at explaining technical decisions to a non-technical stakeholder (professor).</li>
+          </ul>
+          <div className="pt-2">
+            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Next steps</p>
+            <ul className="mt-2 space-y-2 text-slate-700">
+              <li className="flex items-start gap-2"><ArrowRight className="mt-0.5 h-4 w-4 text-blue-600" /> Integrate a real payment gateway</li>
+              <li className="flex items-start gap-2"><ArrowRight className="mt-0.5 h-4 w-4 text-blue-600" /> Add better admin analytics beyond MVP</li>
+            </ul>
+          </div>
         </div>
       </section>
     </div>
