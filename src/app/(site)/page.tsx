@@ -1,4 +1,6 @@
-﻿import Link from "next/link"
+﻿export const dynamic = "force-dynamic";
+
+import Link from "next/link"
 import { ArrowLeft, Mail, MapPin, PhoneCall, Shield, ShieldCheck, Sparkles } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
