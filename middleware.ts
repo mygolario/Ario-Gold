@@ -1,7 +1,6 @@
-import type { NextRequest } from "next/server"
+﻿import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-
-import { auth } from "@/lib/auth"
+import { getToken } from "next-auth/jwt"
 
 const userRoutes = ["/dashboard", "/buy", "/sell", "/kyc", "/delivery-requests"]
 
@@ -10,16 +9,16 @@ const isUserRoute = (pathname: string) =>
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const session = await auth()
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
 
   if (isUserRoute(pathname)) {
-    if (!session?.user || session.user.role !== "USER") {
+    if (!token || token.role !== "USER") {
       return NextResponse.redirect(new URL("/login", request.url))
     }
   }
 
   if (pathname.startsWith("/admin")) {
-    if (!session?.user || (session.user.role !== "ADMIN" && session.user.role !== "KYC_OFFICER")) {
+    if (!token || (token.role !== "ADMIN" && token.role !== "KYC_OFFICER")) {
       return NextResponse.redirect(new URL("/login", request.url))
     }
   }
@@ -37,3 +36,4 @@ export const config = {
     "/admin/:path*",
   ],
 }
+
