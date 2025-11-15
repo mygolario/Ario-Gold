@@ -1,0 +1,273 @@
+// schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+  KYC_OFFICER
+}
+
+enum KycLevel {
+  LEVEL0    // ??? ???????
+  LEVEL1    // ??????? ????
+  LEVEL2    // ????? ????
+  LEVEL3    // VIP
+}
+
+enum KycStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum DocumentType {
+  NATIONAL_ID
+  SELFIE
+  SELFIE_WITH_ID
+  ADDRESS_PROOF
+  BANK_CARD
+  VIDEO
+}
+
+enum DocumentStatus {
+  DOC_PENDING
+  DOC_APPROVED
+  DOC_REJECTED
+}
+
+enum WalletType {
+  FIAT
+  GOLD
+}
+
+enum Currency {
+  IRR        // ???? DB
+  GOLD_GRAM  // ???? ?? ???? ?? ???
+}
+
+enum OrderType {
+  BUY_GOLD   // ????? ??? ??????
+  SELL_GOLD  // ????? ??? ????????
+}
+
+enum OrderStatus {
+  CREATED
+  PENDING_PAYMENT
+  PAID
+  COMPLETED
+  CANCELLED
+}
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum TransactionRefType {
+  ORDER
+  DELIVERY_REQUEST
+  MANUAL_ADJUSTMENT
+}
+
+enum DeliveryType {
+  GOLD_BAR
+  GOLD_COIN
+  RAW_GOLD  // ???? ??????
+}
+
+enum DeliveryStatus {
+  REQUESTED
+  IN_PROGRESS
+  SHIPPED
+  DELIVERED
+  REJECTED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model User {
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  phone         String      @unique
+  email         String?     @unique
+  passwordHash  String?     // ???? ????? ???? ????????
+
+  fullName      String?
+  nationalId    String?     @unique
+  birthDate     DateTime?
+  address       String?
+  postalCode    String?
+  city          String?
+
+  role          Role        @default(USER)
+
+  kycProfile    KycProfile?
+  documents     Document[]
+  wallets       Wallet[]
+  orders        Order[]
+  deliveryRequests DeliveryRequest[]
+  riskProfile   RiskProfile?
+  auditLogs     AuditLog[]  @relation("UserAuditLogs")
+
+  // ???? KYC Officer / Admin ?? ????? ???????
+  reviewedKycProfiles KycProfile[] @relation("KycReviewer")
+  reviewedDocuments   Document[]   @relation("DocumentReviewer")
+}
+
+model KycProfile {
+  id           String     @id @default(cuid())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String     @unique
+
+  level        KycLevel   @default(LEVEL0)
+  status       KycStatus  @default(PENDING)
+  rejectionReason String?
+
+  reviewedBy   User?      @relation("KycReviewer", fields: [reviewedById], references: [id])
+  reviewedById String?
+
+  approvedAt   DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Document {
+  id           String          @id @default(cuid())
+  user         User            @relation(fields: [userId], references: [id])
+  userId       String
+
+  type         DocumentType
+  status       DocumentStatus  @default(DOC_PENDING)
+  fileUrl      String
+  note         String?
+
+  reviewedBy   User?           @relation("DocumentReviewer", fields: [reviewedById], references: [id])
+  reviewedById String?
+
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model Wallet {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+
+  type         WalletType
+  currency     Currency
+
+  balance      Decimal       @default(0.0)
+
+  transactions WalletTransaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model WalletTransaction {
+  id            String             @id @default(cuid())
+  wallet        Wallet             @relation(fields: [walletId], references: [id])
+  walletId      String
+
+  type          TransactionType
+  amount        Decimal
+  balanceAfter  Decimal
+
+  refType       TransactionRefType
+  refId         String?
+  metadata      Json?
+
+  createdAt     DateTime           @default(now())
+}
+
+// ????? ????/???? ???
+model Order {
+  id             String      @id @default(cuid())
+  user           User        @relation(fields: [userId], references: [id])
+  userId         String
+
+  type           OrderType
+  status         OrderStatus @default(CREATED)
+
+  fiatAmount     Decimal     // ???? ??????
+  goldGrams      Decimal     // ????? ??? ?? ???
+  pricePerGram   Decimal     // ???? ??????? ?? ??? ?? ???? ?????
+  feePercent     Decimal     @default(0.0)
+  feeAmount      Decimal     @default(0.0)
+
+  // ???? ????? ?? ??? ??????
+  fiatWalletId   String?
+  goldWalletId   String?
+
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+// ???????? ???????
+model PriceSnapshot {
+  id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+
+  gold18Buy     Decimal   // ???? ???? ?? ????? (?? ??? ??)
+  gold18Sell    Decimal   // ???? ???? ?? ?????
+  source        String    // ???? "internal_api" ?? "tgju"
+}
+
+// ??????? ????? ??????
+model DeliveryRequest {
+  id            String        @id @default(cuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String
+
+  grams         Decimal
+  type          DeliveryType
+  status        DeliveryStatus @default(REQUESTED)
+
+  address       String
+  postalCode    String
+  city          String
+  trackingCode  String?
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// ??????? ????
+model RiskProfile {
+  id         String     @id @default(cuid())
+  user       User       @relation(fields: [userId], references: [id])
+  userId     String     @unique
+
+  score      Int        @default(0) // 0-100
+  level      RiskLevel  @default(LOW)
+  notes      String?
+
+  updatedAt  DateTime   @updatedAt
+}
+
+// ??? ?????? ???? ?????? ? ?????
+model AuditLog {
+  id         String    @id @default(cuid())
+  actor      User?     @relation("UserAuditLogs", fields: [actorId], references: [id])
+  actorId    String?
+
+  action     String
+  entity     String    // ???? "Order", "KycProfile"
+  entityId   String?
+  metadata   Json?
+
+  createdAt  DateTime  @default(now())
+}
