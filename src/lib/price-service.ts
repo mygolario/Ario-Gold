@@ -113,7 +113,15 @@ export async function getLatestPrices(): Promise<NormalizedPrices | null> {
   try {
     return await fetchFromRemote()
   } catch (error) {
-    console.warn("price-service.remote-error", error)
+    const toMessage = (err: unknown) => {
+      if (err instanceof Error) return err.message
+      try {
+        return JSON.stringify(err)
+      } catch {
+        return String(err)
+      }
+    }
+    console.warn("price-service.remote-error", toMessage(error))
     const fallback = await prisma.priceSnapshot.findFirst({
       orderBy: { createdAt: "desc" },
     })

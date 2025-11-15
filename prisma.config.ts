@@ -1,3 +1,4 @@
+import "dotenv/config"; // Load environment variables from .env
 import { defineConfig, env } from "prisma/config";
 
 export default defineConfig({
