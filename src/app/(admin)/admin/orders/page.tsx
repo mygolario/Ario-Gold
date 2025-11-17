@@ -7,6 +7,14 @@ import { prisma } from "@/lib/prisma"
 
 const statuses: OrderStatus[] = ["CREATED", "PENDING_PAYMENT", "PAID", "COMPLETED", "CANCELLED"]
 
+const statusLabels: Record<OrderStatus, string> = {
+  CREATED: "ایجاد شده",
+  PENDING_PAYMENT: "در انتظار پرداخت",
+  PAID: "پرداخت شده",
+  COMPLETED: "تسویه شد",
+  CANCELLED: "لغو شده",
+}
+
 export default async function AdminOrdersPage({ searchParams }: { searchParams: { status?: string } }) {
   const statusFilter = searchParams.status && statuses.includes(searchParams.status as OrderStatus)
     ? (searchParams.status as OrderStatus)
@@ -32,11 +40,13 @@ export default async function AdminOrdersPage({ searchParams }: { searchParams: 
             <option value="">همه</option>
             {statuses.map((status) => (
               <option key={status} value={status}>
-                {status}
+                {statusLabels[status]}
               </option>
             ))}
           </select>
-          <button className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white">اعمال</button>
+          <button className="rounded-md bg-amber-600 px-4 py-2 text-sm text-white hover:bg-amber-700">
+            اعمال
+          </button>
         </form>
       </div>
       <Card>
@@ -62,7 +72,7 @@ export default async function AdminOrdersPage({ searchParams }: { searchParams: 
                   <TableCell>{Number(order.fiatAmount).toLocaleString("fa-IR")}</TableCell>
                   <TableCell>{Number(order.goldGrams).toLocaleString("fa-IR")}</TableCell>
                   <TableCell>
-                    <Badge>{order.status}</Badge>
+                    <Badge>{statusLabels[order.status]}</Badge>
                   </TableCell>
                 </TableRow>
               ))}

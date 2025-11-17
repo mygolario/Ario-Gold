@@ -36,7 +36,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
         </div>
         <div className="mt-auto pt-8 text-sm text-slate-500">
           <Button variant="link" className="px-0" asChild>
-            <Link href="/" className="text-blue-600">
+            <Link href="/" className="text-amber-600">
               مشاهده وب‌سایت
             </Link>
           </Button>

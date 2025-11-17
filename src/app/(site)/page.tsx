@@ -1,96 +1,46 @@
 ﻿import Link from "next/link"
-import { ArrowRight, Box, CheckCircle2, Database, FileDown, Layout, ShoppingCart, Shield, Sparkles } from "lucide-react"
+import { ArrowLeft, CheckCircle2, Shield, Sparkles, TrendingUp, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-export default function CaseStudyPage() {
+export default function HomePage() {
   return (
-    <div className="space-y-20 pb-16">
+    <div className="space-y-20 pb-16" dir="rtl">
       {/* Hero */}
-      <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100">
+      <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-amber-100">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20">
           <div className="mx-auto max-w-3xl text-center space-y-6">
-            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 hover:text-blue-700">Portfolio Case Study</Badge>
+            <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 hover:text-amber-700">
+              خرید و فروش طلای فیزیکی
+            </Badge>
             <h1 className="text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
-              Ario-Gold — E-commerce MVP for Online Gold Shopping
+              آریو طلا — پلتفرم امن خرید و فروش طلا
             </h1>
             <p className="text-lg text-slate-600">
-              A university project MVP exploring a clean, trustworthy experience for buying physical gold online. This site presents the case study. The checkout and payment flows are mock-only and not connected to real payment systems.
+              خرید و فروش طلای فیزیکی با قیمت‌های لحظه‌ای، کیف پول دیجیتال طلا و امکان تحویل فیزیکی. تجربه‌ای شفاف و
+              مطمئن برای سرمایه‌گذاری در طلا.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Button asChild>
-                <Link href="#features" className="flex items-center gap-2">
-                  View Features
-                  <ArrowRight className="h-4 w-4" />
+                <Link href="/login" className="flex items-center gap-2">
+                  شروع خرید و فروش
+                  <ArrowLeft className="h-4 w-4" />
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="#" onClick={(e) => e.preventDefault()} className="flex items-center gap-2">
-                  Download Case Study (PDF)
-                  <FileDown className="h-4 w-4" />
+                <Link href="/about" className="flex items-center gap-2">
+                  درباره ما
                 </Link>
               </Button>
             </div>
             <div className="pt-2 text-xs text-slate-500">
-              MVP demo pages are available for exploration only: {" "}
-              <Link href="/dashboard" className="text-blue-700 underline">Dashboard</Link> {" • "}
-              <Link href="/admin" className="text-blue-700 underline">Admin</Link>
+              برای مشاهده قیمت‌های لحظه‌ای و شروع معامله،{" "}
+              <Link href="/login" className="text-amber-700 underline">
+                وارد حساب کاربری شوید
+              </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview */}
-      <section id="overview" className="mx-auto max-w-6xl px-4">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-slate-900">Project Overview</h2>
-          <p className="mt-2 text-slate-600">High-level context for the Ario-Gold MVP.</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Role</CardTitle>
-            </CardHeader>
-            <CardContent className="text-slate-600">Product Designer & Full-Stack Developer</CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Timeline</CardTitle>
-            </CardHeader>
-            <CardContent className="text-slate-600">2025 – University Project</CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Stack</CardTitle>
-            </CardHeader>
-            <CardContent className="text-slate-600">Next.js, TypeScript, Prisma, PostgreSQL, Tailwind CSS</CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Focus</CardTitle>
-            </CardHeader>
-            <CardContent className="text-slate-600">MVP for Iranian online gold market</CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Problem & Goals */}
-      <section id="problem-goals" className="bg-white py-16">
-        <div className="mx-auto max-w-4xl space-y-6 px-4">
-          <h2 className="text-3xl font-bold text-slate-900">Problem & Goals</h2>
-          <p className="text-slate-700">
-            In Iran, most gold purchases still happen offline. My professor wanted to see if we could design a clean, trustworthy, modern experience for buying physical gold online.
-          </p>
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">Goals</p>
-            <ul className="grid gap-2 text-slate-700 md:grid-cols-2">
-              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Clear product presentation (weights, purity, prices)</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Simple checkout flow</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Admin-friendly product management</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> A polished MVP to demonstrate technical and design skills</li>
-            </ul>
           </div>
         </div>
       </section>
@@ -98,105 +48,157 @@ export default function CaseStudyPage() {
       {/* Features */}
       <section id="features" className="mx-auto max-w-6xl px-4">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-slate-900">Solution & Features</h2>
-          <p className="mt-2 text-slate-600">A showcase of the MVP capabilities (mocked payments).</p>
+          <h2 className="text-3xl font-bold text-slate-900">ویژگی‌های پلتفرم</h2>
+          <p className="mt-2 text-slate-600">امکاناتی که تجربه خرید و فروش طلا را برای شما آسان می‌کند</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center gap-3">
-              <Box className="h-5 w-5 text-blue-600" />
-              <CardTitle>Product Catalog</CardTitle>
+              <TrendingUp className="h-5 w-5 text-amber-600" />
+              <CardTitle>قیمت‌های لحظه‌ای</CardTitle>
             </CardHeader>
-            <CardContent className="text-slate-600">Catalog for gold items with clear specs (weight, purity, pricing).</CardContent>
+            <CardContent className="text-slate-600">
+              قیمت‌های به‌روز طلا (۱۸ عیار، ۲۴ عیار، سکه امامی) با به‌روزرسانی خودکار هر ۳۰ ثانیه
+            </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center gap-3">
-              <ShoppingCart className="h-5 w-5 text-blue-600" />
-              <CardTitle>Cart & Orders</CardTitle>
+              <Shield className="h-5 w-5 text-amber-600" />
+              <CardTitle>کیف پول دیجیتال</CardTitle>
             </CardHeader>
-            <CardContent className="text-slate-600">Simple cart and order flow (MVP-only, no real payment processing).</CardContent>
+            <CardContent className="text-slate-600">
+              نگهداری طلا و ریال در کیف پول دیجیتال امن با امکان مشاهده موجودی و تاریخچه تراکنش‌ها
+            </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center gap-3">
-              <Shield className="h-5 w-5 text-blue-600" />
-              <CardTitle>Basic Admin</CardTitle>
+              <Sparkles className="h-5 w-5 text-amber-600" />
+              <CardTitle>تحویل فیزیکی</CardTitle>
             </CardHeader>
-            <CardContent className="text-slate-600">Admin panel for managing products and reviewing orders.</CardContent>
+            <CardContent className="text-slate-600">
+              امکان درخواست تحویل فیزیکی طلا (سکه، شمش، آب‌شده) با پشتیبانی از ارسال به سراسر کشور
+            </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center gap-3">
-              <Sparkles className="h-5 w-5 text-blue-600" />
-              <CardTitle>Scalable Stack</CardTitle>
+              <Users className="h-5 w-5 text-amber-600" />
+              <CardTitle>احراز هویت سریع</CardTitle>
             </CardHeader>
-            <CardContent className="text-slate-600">Architecture ready to integrate real payments in the future.</CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Tech Stack & Architecture */}
-      <section id="tech-stack" className="bg-neutral-100 py-16">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-2">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold text-slate-900">Tech Stack & Architecture</h2>
-            <ul className="space-y-2 text-slate-700">
-              <li><span className="font-semibold">Frontend:</span> Next.js, TypeScript, Tailwind CSS</li>
-              <li><span className="font-semibold">Backend:</span> Next.js API Routes, Prisma ORM</li>
-              <li><span className="font-semibold">Database:</span> PostgreSQL</li>
-              <li><span className="font-semibold">Deployment:</span> Development on localhost, ready for Vercel</li>
-            </ul>
-          </div>
-          <Card className="self-center">
-            <CardHeader className="flex flex-row items-center gap-3">
-              <Layout className="h-5 w-5 text-blue-600" />
-              <CardTitle>Flow Overview</CardTitle>
-            </CardHeader>
-            <CardContent className="text-sm text-slate-600 space-y-3">
-              <div className="flex items-center gap-2"><Layout className="h-4 w-4 text-blue-600" /> UI (Next.js pages/components)</div>
-              <div className="flex items-center gap-2"><Shield className="h-4 w-4 text-blue-600" /> API (Route handlers, auth, validation)</div>
-              <div className="flex items-center gap-2"><Database className="h-4 w-4 text-blue-600" /> Data (Prisma models → PostgreSQL)</div>
+            <CardContent className="text-slate-600">
+              فرآیند KYC ساده و سریع با سطوح مختلف برای کاربران عادی و ویژه
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Screenshots */}
-      <section id="screenshots" className="mx-auto max-w-6xl px-4">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-slate-900">Screenshots</h2>
-          <p className="mt-2 text-slate-600">Placeholder cards — replace with real images later.</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            "Home Screen Placeholder",
-            "Product Detail Placeholder",
-            "Checkout Placeholder",
-            "Admin Panel Placeholder",
-          ].map((title) => (
-            <Card key={title} className="border-dashed">
-              <CardHeader>
-                <CardTitle>{title}</CardTitle>
-              </CardHeader>
-              <CardContent className="h-40 rounded-md bg-neutral-100" />
-            </Card>
-          ))}
+      {/* Benefits */}
+      <section id="benefits" className="bg-white py-16">
+        <div className="mx-auto max-w-4xl space-y-6 px-4">
+          <h2 className="text-3xl font-bold text-slate-900 text-center">چرا آریو طلا؟</h2>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-600 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-slate-900">شفافیت کامل قیمت‌ها</p>
+                <p className="text-sm text-slate-600">
+                  قیمت‌های لحظه‌ای و محاسبه شفاف کارمزد قبل از ثبت سفارش. هیچ هزینه پنهانی وجود ندارد.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-600 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-slate-900">امنیت بالا</p>
+                <p className="text-sm text-slate-600">
+                  طلای شما در خزانه بیمه‌شده نگهداری می‌شود. تمام تراکنش‌ها ثبت و قابل ردیابی هستند.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-600 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-slate-900">کارمزد پایین</p>
+                <p className="text-sm text-slate-600">
+                  کارمزد ثابت ۰.۲٪ بر مبلغ تراکنش که در مقایسه با روش‌های سنتی بسیار مقرون به صرفه است.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-600 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-slate-900">دسترسی ۲۴ ساعته</p>
+                <p className="text-sm text-slate-600">
+                  خرید و فروش طلا در هر ساعت از شبانه‌روز. قیمت‌ها به‌صورت خودکار به‌روز می‌شوند.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Learnings */}
-      <section id="learnings" className="bg-white py-16">
-        <div className="mx-auto max-w-4xl space-y-6 px-4">
-          <h2 className="text-3xl font-bold text-slate-900">Learnings & Next Steps</h2>
-          <ul className="space-y-2 text-slate-700">
-            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Learned how to design an MVP around real constraints (compliance, local market, payment gateways).</li>
-            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Practiced connecting a relational database to a modern React framework using Prisma.</li>
-            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-blue-600" /> Improved at explaining technical decisions to a non-technical stakeholder (professor).</li>
-          </ul>
-          <div className="pt-2">
-            <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Next steps</p>
-            <ul className="mt-2 space-y-2 text-slate-700">
-              <li className="flex items-start gap-2"><ArrowRight className="mt-0.5 h-4 w-4 text-blue-600" /> Integrate a real payment gateway</li>
-              <li className="flex items-start gap-2"><ArrowRight className="mt-0.5 h-4 w-4 text-blue-600" /> Add better admin analytics beyond MVP</li>
-            </ul>
+      {/* How it works */}
+      <section id="how-it-works" className="mx-auto max-w-6xl px-4">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-slate-900">چگونه کار می‌کند؟</h2>
+          <p className="mt-2 text-slate-600">فرآیند ساده خرید و فروش طلا در سه مرحله</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 font-bold">
+                  ۱
+                </div>
+                <CardTitle>ثبت‌نام و احراز هویت</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="text-slate-600">
+              ثبت‌نام با شماره موبایل و تکمیل فرآیند KYC برای دسترسی به تمام امکانات پلتفرم
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 font-bold">
+                  ۲
+                </div>
+                <CardTitle>واریز و خرید طلا</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="text-slate-600">
+              واریز ریال به کیف پول و خرید طلا با قیمت لحظه‌ای. طلای خریداری شده در کیف پول دیجیتال شما ذخیره می‌شود
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 font-bold">
+                  ۳
+                </div>
+                <CardTitle>فروش یا تحویل</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="text-slate-600">
+              فروش طلا و تبدیل به ریال یا درخواست تحویل فیزیکی طلا (سکه، شمش) به آدرس شما
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section id="cta" className="bg-gradient-to-br from-amber-50 to-amber-100 py-16">
+        <div className="mx-auto max-w-4xl text-center space-y-6 px-4">
+          <h2 className="text-3xl font-bold text-slate-900">آماده شروع هستید؟</h2>
+          <p className="text-lg text-slate-600">
+            همین حالا ثبت‌نام کنید و از مزایای خرید و فروش طلا به‌صورت آنلاین بهره‌مند شوید
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button size="lg" asChild>
+              <Link href="/register">ثبت‌نام رایگان</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/contact">تماس با پشتیبانی</Link>
+            </Button>
           </div>
         </div>
       </section>

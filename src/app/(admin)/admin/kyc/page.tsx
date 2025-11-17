@@ -1,8 +1,16 @@
 ﻿import Link from "next/link"
+import { KycLevel } from "@prisma/client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { prisma } from "@/lib/prisma"
+
+const levelLabels: Record<KycLevel, string> = {
+  LEVEL0: "سطح ۰",
+  LEVEL1: "سطح ۱",
+  LEVEL2: "سطح ۲",
+  LEVEL3: "سطح ۳",
+}
 
 export default async function AdminKycPage() {
   const profiles = await prisma.kycProfile.findMany({
@@ -36,9 +44,9 @@ export default async function AdminKycPage() {
                 <TableRow key={profile.id}>
                   <TableCell>{profile.user.fullName ?? "-"}</TableCell>
                   <TableCell>{profile.user.phone}</TableCell>
-                  <TableCell>{profile.level}</TableCell>
+                  <TableCell>{levelLabels[profile.level]}</TableCell>
                   <TableCell>
-                    <Link href={`/admin/kyc/${profile.userId}`} className="text-blue-600">
+                    <Link href={`/admin/kyc/${profile.userId}`} className="text-amber-600 hover:underline">
                       بررسی
                     </Link>
                   </TableCell>

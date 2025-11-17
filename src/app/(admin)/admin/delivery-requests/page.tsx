@@ -9,6 +9,20 @@ import { updateDeliveryStatusAction } from "./actions"
 
 const statuses: DeliveryStatus[] = ["REQUESTED", "IN_PROGRESS", "SHIPPED", "DELIVERED", "REJECTED"]
 
+const statusLabels: Record<DeliveryStatus, string> = {
+  REQUESTED: "درخواست شده",
+  IN_PROGRESS: "در حال پردازش",
+  SHIPPED: "ارسال شده",
+  DELIVERED: "تحویل داده شده",
+  REJECTED: "رد شده",
+}
+
+const typeLabels: Record<string, string> = {
+  GOLD_BAR: "شمش",
+  GOLD_COIN: "سکه",
+  RAW_GOLD: "آب‌شده",
+}
+
 export default async function DeliveryRequestsPage() {
   const requests = await prisma.deliveryRequest.findMany({
     include: { user: true },
@@ -44,9 +58,9 @@ export default async function DeliveryRequestsPage() {
                     <div className="text-xs text-slate-500">{request.city}</div>
                   </TableCell>
                   <TableCell>{Number(request.grams).toLocaleString("fa-IR")}</TableCell>
-                  <TableCell>{request.type}</TableCell>
+                  <TableCell>{typeLabels[request.type] ?? request.type}</TableCell>
                   <TableCell>
-                    <Badge>{request.status}</Badge>
+                    <Badge>{statusLabels[request.status]}</Badge>
                   </TableCell>
                   <TableCell>
                     <form action={updateDeliveryStatusAction} className="flex flex-col gap-2 text-xs">
@@ -54,7 +68,7 @@ export default async function DeliveryRequestsPage() {
                       <select name="status" defaultValue={request.status} className="rounded-md border border-neutral-200 p-1">
                         {statuses.map((status) => (
                           <option key={status} value={status}>
-                            {status}
+                            {statusLabels[status]}
                           </option>
                         ))}
                       </select>
@@ -64,7 +78,9 @@ export default async function DeliveryRequestsPage() {
                         placeholder="کد رهگیری"
                         defaultValue={request.trackingCode ?? ""}
                       />
-                      <button className="rounded-md bg-blue-600 py-1 text-white">ذخیره</button>
+                      <button className="rounded-md bg-amber-600 py-1 text-white hover:bg-amber-700">
+                        ذخیره
+                      </button>
                     </form>
                   </TableCell>
                 </TableRow>
